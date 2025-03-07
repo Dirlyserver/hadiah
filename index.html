@@ -15,23 +15,32 @@
             overflow: hidden;
             text-align: center;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
         /* Efek teks glow putih */
         .glow-text {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 3rem;
             color: white;
             text-shadow: 0 0 10px white, 0 0 20px white, 0 0 40px white;
             letter-spacing: 5px;
+            font-weight: bold;
         }
         /* Huruf muncul acak */
         .hidden {
             opacity: 0;
             display: inline-block;
             transition: opacity 0.3s ease-in-out;
+        }
+        /* Posisi teks agar tertata rapi */
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
         }
         /* Bintang */
         .star {
@@ -44,63 +53,99 @@
         }
         @keyframes twinkle {
             50% { opacity: 0.3; }
-        }
-        /* Tombol */
-        button {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #ffffff;
-            color: black;
-            font-size: 20px;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px white;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #ccc;
-            box-shadow: 0 0 20px white;
-        }
+        }button {
+    background: linear-gradient(145deg, #ffffff, #dcdcdc); /* Efek glossy */
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.5),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 1;
+    opacity: 0; /* Awalnya tidak terlihat */
+    visibility: hidden; /* Agar tidak bisa diklik sebelum muncul */
+    transition: opacity 1s ease-in-out;
+}
+
+/* Efek hover agar tombol terlihat lebih glowing */
+button:hover {
+    background: linear-gradient(145deg, #ffffff, #e0e0e0);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 
+                0 0 50px rgba(255, 255, 255, 0.6), 
+                0 0 75px rgba(255, 255, 255, 0.4);
+    transform: scale(1.05); /* Tombol sedikit membesar saat hover */
+    animation: pulse 1.5s infinite alternate; /* Efek berdenyut */
+}
+
+/* Efek klik agar terasa ditekan */
+button:active {
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.3),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.3);
+    transform: scale(0.95); /* Tombol sedikit mengecil saat ditekan */
+}
+
+/* Animasi glowing berdenyut */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+    }
+}
+
+
+
+        
     </style>
 </head>
 <body>
-    <h1 class="glow-text">
-        <span class="hidden">✨🎉</span>
-        <span class="hidden">H</span>
-        <span class="hidden">a</span>
-        <span class="hidden">p</span>
-        <span class="hidden">p</span>
-        <span class="hidden">y</span>
-        <span class="hidden"> </span>
-        
+    <!-- Teks Ucapan -->
+    <div class="text-container">
+        <h1 class="glow-text">
+<span class="hidden">🎉</span>
+            <span class="hidden">H</span>
+            <span class="hidden">a</span>
+            <span class="hidden">p</span>
+            <span class="hidden">p</span>
+            <span class="hidden">y</span>
+            <span class="hidden">🎂</span>
+        </h1>
+        <h1 class="glow-text">
+            <span class="hidden">🎁</span>
+            <span class="hidden">B</span>
+            <span class="hidden">i</span>
+            <span class="hidden">r</span>
+            <span class="hidden">t</span>
+            <span class="hidden">h</span>
+            <span class="hidden">d</span>
+            <span class="hidden">a</span>
+            <span class="hidden">y</span>
+            <span class="hidden">🎉</span>
+        </h1>
+        <h1 class="glow-text">
+            <span class="hidden">🎂</span>
+            <span class="hidden">I</span>
+            <span class="hidden">v</span>
+            <span class="hidden">a</span>
+            <span class="hidden">n</span>
+            <span class="hidden">a</span>
+            <span class="hidden">🥳</span>
+        </h1>
+    </div>
 
-        <span class="hidden">B</span>
-        <span class="hidden">i</span>
-        <span class="hidden">r</span>
-        <span class="hidden">t</span>
-        <span class="hidden">h</span>
-        <span class="hidden">d</span>
-        <span class="hidden">a</span>
-        <span class="hidden">y</span>
-        <span class="hidden"> </span>
-        <span class="hidden"> </span>
-        <span class="hidden">I</span>
-        <span class="hidden">v</span>
-        <span class="hidden">a</span>
-        <span class="hidden">n</span>
-        <span class="hidden">a</span>
-        <span class="hidden">🎂</span>
-        <span class="hidden">🥳</span>
-    </h1>
-    <button onclick="goToNextPage()">clik me 😁 </button>
+    <!-- Tombol Lanjut -->
+    <button onclick="goToNextPage()">clik me 😁</button>
 
-    <!-- Tambahkan elemen audio -->
+    <!-- Musik -->
     <audio id="bg-music" loop>
-        <source src="jdkmp3" type="audio/mp3">
+        <source src="musik.mp3" type="audio/mp3">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
@@ -144,6 +189,26 @@
                 musicStarted = true;
             }
         });
+        
+        function animateText() {
+    let letters = document.querySelectorAll(".hidden");
+    let indexes = Array.from({ length: letters.length }, (_, i) => i);
+    indexes = indexes.sort(() => Math.random() - 0.5); // Acak urutan
+
+    indexes.forEach((index, i) => {
+        setTimeout(() => {
+            letters[index].style.opacity = 1;
+        }, i * 100);
+    });
+
+    // Tunggu sampai semua huruf muncul, lalu tampilkan tombol
+    setTimeout(() => {
+        let button = document.querySelector("button");
+        button.style.opacity = 1;
+        button.style.visibility = "visible";
+    }, indexes.length * 100 + 500); // Tambahkan jeda 0.5 detik setelah teks selesai
+}
+
     </script>
 </body>
 </html>
