@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Dokumen</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            
+            background: linear-gradient(to bottom right, gray,#ffff);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .book {
+            position: absolute;
+            transition: transform 3s;
+            perspective: 2500px;
+            left: 600px;
+            top: 300px;
+          
+        }
+        
+        input {
+            display: none;
+        }
+        
+        .page {
+            position: absolute;
+            background-color: white;
+            width: 580px;
+            height: 580px;
+            border-radius: 0 15px 15px 0;
+            margin-top: 0px;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 3.5s;
+            
+        }
+        .img1 {
+            width: 430px;
+            height: 460px;
+            margin: auto;
+            position: absolute;
+            top: 65px;
+            left:80px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img2 {
+            width: 450px;
+            height: 450px;
+            margin: auto;
+            position: absolute;
+            top: 70px;
+            left: 70px;
+            pointer-events: none; 
+            transform: rotate(10deg);
+            object-fit: cover;
+        }
+        
+        .img3 {
+            width: 430px;
+            height: 460px;
+            margin: auto;
+            position: absolute;
+            top: 65px;
+            left:80px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img4 {
+            width: 450px;
+            height: 450px;
+            margin: auto;
+            position: absolute;
+            top: 70px;
+            left: 70px;
+            pointer-events: none; 
+            transform: rotate(-10deg);
+            object-fit: cover;
+        }
+        
+        .img5 {
+            width: 430px;
+            height: 460px;
+            margin: auto;
+            position: absolute;
+            top: 65px;
+            left:80px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img6 {
+            width: 450px;
+            height: 450px;
+            margin: auto;
+            position: absolute;
+            top: 70px;
+            left:70px;
+            pointer-events: none; 
+            transform: rotate(-10deg);
+            object-fit: cover;
+        }
+        
+        .img7 {
+            width: 430px;
+            height: 460px;
+            margin: auto;
+            position: absolute;
+            top: 65px;
+            left:80px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+
+        .front-page, .back-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            box-sizing: border-box;
+            padding: 1rem;
+            border-radius: 0 5px 5px 0 ;
+           
+        }
+        .back-page {
+            transform: rotateY(180deg);
+            border-radius: 5px 0 0 5px ;
+        }
+       
+         .next, .prev {
+            position: absolute;
+            bottom: 1em;
+            cursor: pointer;
+            color: #000;
+            font-size: 25px;
+            width: 580px; /* Sesuai keinginan */
+            height: 580px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: auto;
+            top:0px ;
+        }
+        .next {
+            right: 0;
+        }
+        .prev {
+            left: 0;
+        }
+        
+.circle-text {
+    width: 460px; /* Ukuran lingkaran */
+    height: 475px;
+    background-color: black; /* Warna hitam */
+    display: flex;
+    border-radius: 50%; /* Membuatnya bulat */
+    position: absolute;
+    top: 50%;
+    right:-50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text2 {
+    width: 460px; /* Ukuran lingkaran */
+    height: 475px;
+    background-color: black; /* Warna hitam */
+    display: flex;
+    border-radius: 50%; /* Membuatnya bulat */
+    position: absolute;
+    top: 50%;
+    right:-10%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rgbText {
+    0% { color: #95bdff; }
+    33% { color: #FFB8E0; }
+    66% { color: #15F5BA; }
+    100% { color: yellow; }
+}
+
+.big {
+  font-size: 45px;
+}
+ .text1 {
+    position: absolute;
+    top: 210px;/* Geser ke atas agar keluar dari lingkaran */
+    left: -13px;
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 25px;
+    font-weight: bold;
+    font-size: 40px;
+    animation: rgbText 2s infinite linear;
+    font-family:courier;
+}
+
+.text2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: #B4E4FF; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+.text4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: white; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text6 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: white; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text7 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text8 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 30px;
+    font-family: "Concert One", sans-serif;
+}
+
+ .text9 {
+    position: absolute;
+    top: 215px;/* Geser ke atas agar keluar dari lingkaran */
+    left: 80px;
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 40px;
+    animation: rgbText 2s infinite linear;
+    font-family:courier;
+}
+     
+     #page1 .front-page {
+       background-color: #393E46;
+       overflow: hidden; 
+       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page1 .back-page {
+      background-color:#393E46 ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      
+     }
+     
+      #page2 .front-page {
+      background-color:#B4E4FF ;
+      
+     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page2 .back-page {
+      background-color:white ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      
+     }
+     
+      #page3 .front-page {
+      background-color:#393E46 ;
+      
+     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+      #page3 .back-page {
+      background-color:#393E46 ;
+      
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+      #page4 .front-page {
+      background-color:white ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      
+     }
+     
+     #page4 .back-page {
+      background-color:white ;
+      
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+      #page5 .front-page {
+      background-color: #393E46;
+      
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page5 .back-page {
+      background-color: #393E46 ;
+      
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page6 .front-page {
+      background-color: #95bdff;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page6 .back-page {
+      background-color: white ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page7 .front-page {
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page7 .back-page {
+      background-color: white ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page8 .front-page {
+      background-color:#FFB8E0 ;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+     #page8 .back-page {
+      background-color: #393E46 ;
+      overflow: hidden;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+     }
+     
+        #page1 { z-index: 8; }
+        #page2 { z-index: 7; }
+        #page3 { z-index: 6; }
+        #page4 { z-index: 5; }
+        #page5 { z-index: 4; }
+        #page6 { z-index: 3; }
+        #page7 { z-index: 2; }
+        #page8 { z-index: 1; }
+        
+        
+
+        /* Animasi buka/tutup page1 */
+       #checkbox-page1:checked ~ .book {
+           transform: translateX(285px);
+       }
+        /* Animasi buka/tutup page8 */
+       #checkbox-page8:checked ~ .book {
+           transform: translateX(575px);
+       }
+
+        /* Halaman buku */
+        #checkbox-page1:checked ~ .book #page1 {
+            transform: rotateY(-180deg);
+            z-index: 10;
+        }
+        #checkbox-page2:checked ~ .book #page2 {
+            transform: rotateY(-180deg);
+            z-index: 11;
+        }
+        #checkbox-page3:checked ~ .book #page3 {
+            transform: rotateY(-180deg);
+            z-index: 12;
+        }
+        #checkbox-page4:checked ~ .book #page4 {
+            transform: rotateY(-180deg);
+            z-index: 13;
+        }
+        #checkbox-page5:checked ~ .book #page5 {
+            transform: rotateY(-180deg);
+            z-index: 14;
+        }
+        #checkbox-page6:checked ~ .book #page6 {
+            transform: rotateY(-180deg);
+            z-index: 15;
+        }
+        #checkbox-page7:checked ~ .book #page7 {
+            transform: rotateY(-180deg);
+            z-index: 16;
+        }
+        #checkbox-page8:checked ~ .book #page8 {
+            transform: rotateY(-180deg);
+            z-index: 17;
+        }
+        
+
+  
+  .btn-3d {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+            background: linear-gradient(145deg, #222, #000);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px #000, -5px -5px 10px #333;
+            cursor: pointer;
+            position:absolute;
+            top:1000px;
+            left:780px;
+            
+            
+        }
+
+        .btn-3d:hover {
+            background: linear-gradient(145deg, #000, #222);
+            box-shadow: 3px 3px 6px #000, -3px -3px 6px #333;
+            transform: translateY(3px);
+        }
+
+a {
+  text-decoration: none;
+}
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: inset 3px 3px 6px #000, inset -3px -3px 6px #333;
+        }
+
+        
+
+        /* Tambahkan kelas aktif untuk memunculkan tombol */
+        .show {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        
+        @media (max-width: 768px) {
+          body, html {
+    overflow-x: hidden; /* Mencegah geser ke samping */
+    max-width: 100vw;  /* Pastikan tidak melewati batas layar */
+    position: relative; /* Pastikan elemen mengikuti batas layar */
+}
+      
+        .book {
+            position: absolute;
+            transition: transform 3s;
+            perspective: 2500px;
+            left: 145px;
+            top: 300px;
+        }
+        
+        .big {
+  font-size: 20px;
+}
+        
+        .img1 {
+            width: 210px;
+            height: 230px;
+            margin: auto;
+            position: absolute;
+            top: 20px;
+            left:30px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img2 {
+            width: 200px;
+            height: 220px;
+            margin: auto;
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            pointer-events: none; 
+            transfor: rotate(10deg);
+            object-fit: cover;
+        }
+        
+        .img3 {
+            width: 210px;
+            height: 230px;
+            margin: auto;
+            position: absolute;
+            top: 20px;
+            left:30px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img4 {
+            width: 200px;
+            height: 220px;
+            margin: auto;
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            pointer-events: none; 
+            transfor: rotate(10deg);
+            object-fit: cover;
+            
+        }
+        
+        .img5 {
+            width: 210px;
+            height: 230px;
+            margin: auto;
+            position: absolute;
+            top: 20px;
+            left:30px;
+            pointer-events: none; 
+            object-fit: cover;
+        }
+        
+        .img6 {
+            width: 200px;
+            height: 220px;
+            margin: auto;
+            position: absolute;
+            top: 25px;
+            left: 35px;
+            pointer-events: none; 
+            transfor: rotate(10deg);
+            object-fit: cover;
+        }
+        
+        .img7 {
+            width: 210px;
+            height: 230px;
+            margin: auto;
+            position: absolute;
+            top: 20px;
+            left:30px;
+            pointer-events: none; 
+            object-fit: cover;
+            
+        }
+  .text1 {
+    position: absolute;
+    top: 105px;/* Geser ke atas agar keluar dari lingkaran */
+    left: -5px;
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    animation: rgbText 2s infinite linear;
+    font-family:courier;
+}
+
+.text2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: #B4E4FF; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+.text4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: white; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text6 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: white; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text7 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+.text8 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 1px;
+    color: black; /* Warna teks */
+    font-size: 15px;
+    font-family: "Concert One", sans-serif;
+}
+
+ .text9 {
+    position: absolute;
+    top: 110px;/* Geser ke atas agar keluar dari lingkaran */
+    left: 40px;
+    white-space: nowrap; /* Mencegah teks terpotong */
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    animation: rgbText 2s infinite linear;
+    font-family:courier;
+}
+
+.circle-text {
+    width: 220px; /* Ukuran lingkaran */
+    height: 235px;
+    background-color: black; /* Warna hitam */
+    display: flex;
+    border-radius: 50%; /* Membuatnya bulat */
+    position: absolute;
+    top: 50%;
+    right:-50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text2 {
+    width: 220px; /* Ukuran lingkaran */
+    height: 235px;
+    background-color: black; /* Warna hitam */
+    display: flex;
+    border-radius: 50%; /* Membuatnya bulat */
+    position: absolute;
+    top: 50%;
+    right:-15%;
+    transform: translate(-50%, -50%);
+}
+
+.page {
+            position: absolute;
+            background-color: white;
+            width: 270px;
+            height: 270px;
+            border-radius: 0 15px 15px 0;
+            margin-top: 0px;
+            transform-origin: left;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 4.5s;
+        }
+        
+        /* Animasi buka/tutup page1 */
+       #checkbox-page1:checked ~ .book {
+           transform: translateX(131px);
+       }
+        /* Animasi buka/tutup page8 */
+       #checkbox-page8:checked ~ .book {
+           transform: translateX(265px);
+       }
+       
+   .switch {
+    position: absolute;
+    top:600px;
+    left:250px;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+  }
+  .next, .prev {
+            position: absolute;
+            bottom: 1em;
+            cursor: pointer;
+            color: #000;
+            font-size: 25px;
+            width: 270px; /* Sesuai keinginan */
+            height: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: auto;
+            top:0px ;
+    }
+    .btn-3d {
+      top:650px;
+      left:175px;
+    }
+        }
+            .salju-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vh;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .salju {
+            position: absolute;
+            top: -10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="checkbox-page1">
+    <input type="checkbox" id="checkbox-page2">
+    <input type="checkbox" id="checkbox-page3">
+    <input type="checkbox" id="checkbox-page4">
+    <input type="checkbox" id="checkbox-page5">
+    <input type="checkbox" id="checkbox-page6">
+    <input type="checkbox" id="checkbox-page7">
+    <input type="checkbox" id="checkbox-page8">
+   <div class="salju-container"></div>
+   <audio id="myAudio" loop src="jdk.mp3">
+  
+</audio>
+  <a href="hadiah.html" class="btn-3d">click ini ivana:)</a>
+
+<label class="switch">
+  <input type="checkbox" id="musicToggle" onclick="toggleMusic()">
+  <span class="slider round"></span>
+</label>
+    <div class="book">
+         <div class="page" id="page1">
+            <div class="front-page">
+                <div class="circle-text">
+                 <span class="text1"><span class="big">S</span>arivana</span>
+                </div>
+                <label class="next" for="checkbox-page1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                <span class="text2">katakan cinta</span>
+                <label class="prev" for="checkbox-page1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+        <div class="page" id="page2">
+            <div class="front-page">
+              <img class="img1" src="1.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                  <span class="text3">hati ini meminta</span>
+                <label class="prev" for="checkbox-page2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg></label>
+            </div>
+        </div>
+        <div class="page" id="page3">
+            <div class="front-page">
+                  <img class="img2" src="22.jpg" alt="Gambar 3">
+                <label class="next" for="checkbox-page3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                <span class="text4">kau lebih dari teman berbagi</span>
+                <label class="prev" for="checkbox-page3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+        <div class="page" id="page4">
+            <div class="front-page">
+                 <img class="img3" src="3.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                 <span class="text5">jadi kekasihku saja </span>
+                <label class="prev" for="checkbox-page4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+        <div class="page" id="page5">
+            <div class="front-page">
+                 <img class="img4" src="4.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                 </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                 <span class="text6">cinta katakan cinta </span>
+                <label class="prev" for="checkbox-page5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+                <div class="page" id="page6">
+            <div class="front-page">
+                 <img class="img5" src="5.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page6">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                 <span class="text7">hati ini meminta </span>
+                <label class="prev" for="checkbox-page6">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+      
+        <div class="page" id="page7">
+            <div class="front-page">
+                 <img class="img6" src="6.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page7">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                 <span class="text8">kau lebih dari teman berbagi</span>
+                <label class="prev" for="checkbox-page7">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+        
+        <div class="page" onclick="toggleButton()" id="page8">
+            <div class="front-page">
+                 <img class="img7" src="7.jpg" alt="Gambar 2">
+                <label class="next" for="checkbox-page8">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </label>
+            </div>
+            <div class="back-page">
+                 <div class="circle-text2">
+                 <span class="text9">jd kekasihku saja</span>
+                 </div>
+                <label class="prev" for="checkbox-page8">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                </label>
+            </div>
+        </div>
+    </div>
+     <script>
+        function buatSalju() {
+            const jumlahSalju = 100;
+            const container = document.querySelector(".salju-container");
+            container.innerHTML = ""; // Reset salju saat layar berubah
+
+            for (let i = 0; i < jumlahSalju; i++) {
+                let salju = document.createElement("div");
+                salju.classList.add("salju");
+
+                let ukuran = Math.random() * 10 + 3;
+                salju.style.width = ukuran + "px";
+                salju.style.height = ukuran + "px";
+
+                // Pastikan salju jatuh dari seluruh lebar layar
+                salju.style.left = Math.random() * window.innerWidth + "px";
+
+                // Kecepatan jatuh
+                let durasi = Math.random() * 5 + 3;
+                let delay = Math.random() * 5;
+
+                // Animasi unik untuk setiap salju
+                let animID = `jatuh-${i}`;
+                let animasi = `
+                    @keyframes ${animID} {
+                        0% { transform: translateY(0px) translateX(0px); }
+                        100% { transform: translateY(${window.innerHeight}px) translateX(-${Math.random() * 200 + 50}px); }
+                    }
+                `;
+
+                let styleSheet = document.createElement("style");
+                styleSheet.innerHTML = animasi;
+                document.head.appendChild(styleSheet);
+
+                salju.style.animation = `${animID} ${durasi}s linear ${delay}s infinite`;
+
+                container.appendChild(salju);
+            }
+        }
+
+        // Jalankan efek salju
+        buatSalju();
+
+        // Perbarui salju saat ukuran layar berubah
+        window.addEventListener("resize", buatSalju);
+        
+        function toggleButton() {
+            var button = document.querySelector(".btn-3d");
+            button.classList.toggle("show"); // Tambah atau hapus kelas 'show'
+        }
+const audio = document.getElementById("myAudio");
+    const btn = document.getElementById("page1");
+
+    btn.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.currentTime = 0; // Reset ke awal
+            audio.play();
+            
+        } else {
+            audio.pause();
+            audio.currentTime = 0; // Reset ke awal
+            
+        }
+    });
+  
+  
+    </script>
+</body>
+</html>

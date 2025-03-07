@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ivana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: black;
+            overflow: hidden;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        /* Efek teks glow putih */
+        .glow-text {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 40px white;
+            letter-spacing: 5px;
+        }
+        /* Huruf muncul acak */
+        .hidden {
+            opacity: 0;
+            display: inline-block;
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Bintang */
+        .star {
+            position: absolute;
+            background: white;
+            width: 2px;
+            height: 2px;
+            opacity: 0.8;
+            animation: twinkle 2s infinite;
+        }
+        @keyframes twinkle {
+            50% { opacity: 0.3; }
+        }
+        /* Tombol */
+        button {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            color: black;
+            font-size: 20px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ccc;
+            box-shadow: 0 0 20px white;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glow-text">
+        <span class="hidden">✨🎉</span>
+        <span class="hidden">H</span>
+        <span class="hidden">a</span>
+        <span class="hidden">p</span>
+        <span class="hidden">p</span>
+        <span class="hidden">y</span>
+        <span class="hidden"> </span>
+        
+
+        <span class="hidden">B</span>
+        <span class="hidden">i</span>
+        <span class="hidden">r</span>
+        <span class="hidden">t</span>
+        <span class="hidden">h</span>
+        <span class="hidden">d</span>
+        <span class="hidden">a</span>
+        <span class="hidden">y</span>
+        <span class="hidden"> </span>
+        <span class="hidden"> </span>
+        <span class="hidden">I</span>
+        <span class="hidden">v</span>
+        <span class="hidden">a</span>
+        <span class="hidden">n</span>
+        <span class="hidden">a</span>
+        <span class="hidden">🎂</span>
+        <span class="hidden">🥳</span>
+    </h1>
+    <button onclick="goToNextPage()">clik me 😁 </button>
+
+    <!-- Tambahkan elemen audio -->
+    <audio id="bg-music" loop>
+        <source src="jdkmp3" type="audio/mp3">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+        // Membuat bintang di latar belakang
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                document.body.appendChild(star);
+                star.style.left = Math.random() * 100 + "vw";
+                star.style.top = Math.random() * 100 + "vh";
+            }
+        }
+        createStars();
+
+        // Efek animasi teks per huruf secara acak
+        function animateText() {
+            let letters = document.querySelectorAll(".hidden");
+            let indexes = Array.from({ length: letters.length }, (_, i) => i);
+            indexes = indexes.sort(() => Math.random() - 0.5); // Acak urutan
+
+            indexes.forEach((index, i) => {
+                setTimeout(() => {
+                    letters[index].style.opacity = 1;
+                }, i * 100);
+            });
+        }
+        animateText();
+
+        // Fungsi tombol untuk pindah ke halaman berikutnya
+        function goToNextPage() {
+            window.location.href = "n.html"; // Ganti dengan file tujuan
+        }
+
+        // Memulai musik saat layar pertama kali diklik
+        let musicStarted = false;
+        document.body.addEventListener("click", function() {
+            if (!musicStarted) {
+                document.getElementById("bg-music").play();
+                musicStarted = true;
+            }
+        });
+    </script>
+</body>
+</html>
